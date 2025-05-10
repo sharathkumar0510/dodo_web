@@ -1,6 +1,10 @@
-import { Search } from 'lucide-react';
+import { Search, CheckCircle } from 'lucide-react';
+import { useImages } from '@/context/ImageContext';
+import DynamicImage from '@/components/common/DynamicImage';
+import DynamicIcon from '@/components/common/DynamicIcon';
 
 export default function HeroSection() {
+  const { isLoading } = useImages();
   return (
     <section className="relative bg-white py-12 md:py-20">
       <div className="container mx-auto px-4">
@@ -12,7 +16,7 @@ export default function HeroSection() {
             <p className="mt-4 text-lg text-gray-600 max-w-lg">
               Book trusted professionals for cleaning, repairs, salon services, and more. Quality service, transparent pricing, and hassle-free booking.
             </p>
-            
+
             <div className="mt-8 max-w-md">
               <div className="relative">
                 <input
@@ -26,68 +30,112 @@ export default function HeroSection() {
                 </button>
               </div>
             </div>
-            
+
             <div className="mt-8 flex flex-wrap gap-4">
               <div className="flex items-center">
                 <div className="bg-green-50 text-green-700 rounded-full p-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  {isLoading ? (
+                    <CheckCircle className="h-5 w-5" />
+                  ) : (
+                    <DynamicIcon
+                      iconId={12}
+                      category="features"
+                      size={20}
+                      className="h-5 w-5"
+                      fallbackIcon={<CheckCircle className="h-5 w-5" />}
+                    />
+                  )}
                 </div>
                 <span className="ml-2 text-gray-700">Verified Professionals</span>
               </div>
-              
+
               <div className="flex items-center">
                 <div className="bg-green-50 text-green-700 rounded-full p-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  {isLoading ? (
+                    <CheckCircle className="h-5 w-5" />
+                  ) : (
+                    <DynamicIcon
+                      iconId={13}
+                      category="features"
+                      size={20}
+                      className="h-5 w-5"
+                      fallbackIcon={<CheckCircle className="h-5 w-5" />}
+                    />
+                  )}
                 </div>
                 <span className="ml-2 text-gray-700">Hassle-Free Booking</span>
               </div>
-              
+
               <div className="flex items-center">
                 <div className="bg-green-50 text-green-700 rounded-full p-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  {isLoading ? (
+                    <CheckCircle className="h-5 w-5" />
+                  ) : (
+                    <DynamicIcon
+                      iconId={14}
+                      category="features"
+                      size={20}
+                      className="h-5 w-5"
+                      fallbackIcon={<CheckCircle className="h-5 w-5" />}
+                    />
+                  )}
                 </div>
                 <span className="ml-2 text-gray-700">Transparent Pricing</span>
               </div>
             </div>
           </div>
-          
+
           <div className="hidden md:block">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <div className="rounded-lg overflow-hidden shadow-lg h-48 bg-gray-200">
-                  <img 
-                    src="/images/hero/cleaning.jpg" 
-                    alt="Professional Cleaning Service" 
+                  <DynamicImage
+                    imageId={8}
+                    type="background"
+                    category="hero"
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover"
+                    fallbackUrl="/images/hero/cleaning.jpg"
+                    fallbackAlt="Professional Cleaning Service"
                   />
                 </div>
                 <div className="rounded-lg overflow-hidden shadow-lg h-64 bg-gray-200">
-                  <img 
-                    src="/images/hero/salon.jpg" 
-                    alt="Professional Salon Service" 
+                  <DynamicImage
+                    imageId={10}
+                    type="background"
+                    category="hero"
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover"
+                    fallbackUrl="/images/hero/salon.jpg"
+                    fallbackAlt="Professional Salon Service"
                   />
                 </div>
               </div>
               <div className="space-y-4 mt-8">
                 <div className="rounded-lg overflow-hidden shadow-lg h-64 bg-gray-200">
-                  <img 
-                    src="/images/hero/repair.jpg" 
-                    alt="Professional Repair Service" 
+                  <DynamicImage
+                    imageId={9}
+                    type="background"
+                    category="hero"
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover"
+                    fallbackUrl="/images/hero/repair.jpg"
+                    fallbackAlt="Professional Repair Service"
                   />
                 </div>
                 <div className="rounded-lg overflow-hidden shadow-lg h-48 bg-gray-200">
-                  <img 
-                    src="/images/hero/massage.jpg" 
-                    alt="Professional Massage Service" 
+                  <DynamicImage
+                    imageId={11}
+                    type="background"
+                    category="hero"
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover"
+                    fallbackUrl="/images/hero/massage.jpg"
+                    fallbackAlt="Professional Massage Service"
                   />
                 </div>
               </div>

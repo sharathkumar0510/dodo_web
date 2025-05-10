@@ -3,10 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { useImages } from '@/context/ImageContext';
+import DynamicImage from '@/components/common/DynamicImage';
 
 export default function Header() {
   const pathname = usePathname();
   const { itemCount } = useCart();
+  const { isLoading } = useImages();
 
   const isActive = (path: string) => {
     return pathname === path;
@@ -18,9 +21,23 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="relative h-10 w-10 bg-black rounded-md flex items-center justify-center text-white font-bold">
-                <span>DS</span>
-              </div>
+              {isLoading ? (
+                <div className="relative h-10 w-10 bg-black rounded-md flex items-center justify-center text-white font-bold">
+                  <span>DS</span>
+                </div>
+              ) : (
+                <div className="relative h-10 w-10">
+                  <DynamicImage
+                    type="logo"
+                    width={40}
+                    height={40}
+                    className="rounded-md"
+                    fallbackUrl="/logo-placeholder.png"
+                    fallbackAlt="DoDoServices"
+                    priority
+                  />
+                </div>
+              )}
               <span className="text-lg font-semibold">DoDoServices</span>
             </Link>
           </div>
