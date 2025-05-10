@@ -26,8 +26,8 @@ export default function OrderReview({
   onBack,
   isProcessing
 }: OrderReviewProps) {
-  const { address, paymentMethod } = checkoutData;
-  
+  const { address, paymentMethod, scheduledDate, scheduledTime } = checkoutData;
+
   // Format payment method for display
   const getPaymentMethodDisplay = () => {
     switch (paymentMethod.type) {
@@ -41,11 +41,11 @@ export default function OrderReview({
         return 'Not specified';
     }
   };
-  
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-xl font-semibold mb-6">Review Your Order</h2>
-      
+
       <div className="space-y-6">
         {/* Delivery Address */}
         <div>
@@ -63,7 +63,7 @@ export default function OrderReview({
             </p>
           </div>
         </div>
-        
+
         {/* Payment Method */}
         <div>
           <div className="flex justify-between items-center mb-2">
@@ -73,7 +73,35 @@ export default function OrderReview({
             <p>{getPaymentMethodDisplay()}</p>
           </div>
         </div>
-        
+
+        {/* Scheduled Date & Time */}
+        <div>
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="font-medium">Scheduled Date & Time</h3>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-md">
+            {scheduledDate && scheduledTime ? (
+              <div>
+                <p>
+                  <span className="font-medium">Date: </span>
+                  {new Date(scheduledDate).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </p>
+                <p>
+                  <span className="font-medium">Time: </span>
+                  {scheduledTime}
+                </p>
+              </div>
+            ) : (
+              <p className="text-red-500">No date and time selected</p>
+            )}
+          </div>
+        </div>
+
         {/* Order Items */}
         <div>
           <h3 className="font-medium mb-2">Order Items</h3>
@@ -101,7 +129,7 @@ export default function OrderReview({
             ))}
           </div>
         </div>
-        
+
         {/* Order Summary */}
         <div>
           <h3 className="font-medium mb-2">Order Summary</h3>
@@ -111,17 +139,17 @@ export default function OrderReview({
                 <span>Subtotal</span>
                 <span>₹{subtotal.toLocaleString()}</span>
               </div>
-              
+
               <div className="flex justify-between">
                 <span>Discount</span>
                 <span className="text-green-600">-₹{discount.toLocaleString()}</span>
               </div>
-              
+
               <div className="flex justify-between">
                 <span>GST (18%)</span>
                 <span>₹{tax.toLocaleString()}</span>
               </div>
-              
+
               <div className="border-t pt-2 mt-2">
                 <div className="flex justify-between font-semibold">
                   <span>Total</span>
@@ -131,14 +159,14 @@ export default function OrderReview({
             </div>
           </div>
         </div>
-        
+
         {/* Terms and Conditions */}
         <div className="text-sm text-gray-600">
           <p>
             By placing this order, you agree to our <a href="#" className="text-black underline">Terms of Service</a> and <a href="#" className="text-black underline">Privacy Policy</a>.
           </p>
         </div>
-        
+
         {/* Action Buttons */}
         <div className="flex space-x-4">
           <button
