@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "DoDoServices - Home Services at Your Doorstep",
@@ -16,9 +17,9 @@ export default function Home() {
             Quality service, transparent pricing, and hassle-free booking.
           </p>
           <div className="mt-8">
-            <button className="bg-black text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-gray-800 transition-colors">
+            <Link href="/services" className="inline-block bg-black text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-gray-800 transition-colors">
               Book a Service
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -29,19 +30,19 @@ export default function Home() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-3">Cleaning & Pest Control</h3>
             <p className="text-gray-600 mb-4">Professional cleaning and pest control services for your home.</p>
-            <button className="text-black font-medium hover:underline">Learn More →</button>
+            <Link href="/services" className="text-black font-medium hover:underline">Learn More →</Link>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-3">AC & Appliance Repair</h3>
             <p className="text-gray-600 mb-4">Expert repair services for all your home appliances.</p>
-            <button className="text-black font-medium hover:underline">Learn More →</button>
+            <Link href="/services" className="text-black font-medium hover:underline">Learn More →</Link>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-3">Salon & Spa Services</h3>
             <p className="text-gray-600 mb-4">Professional salon and spa services at your doorstep.</p>
-            <button className="text-black font-medium hover:underline">Learn More →</button>
+            <Link href="/services" className="text-black font-medium hover:underline">Learn More →</Link>
           </div>
         </div>
       </section>
