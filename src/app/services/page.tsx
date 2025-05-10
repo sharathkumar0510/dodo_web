@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { api, ServiceCategory, SubService } from '@/lib/api/mockApi';
 import { useCart } from '@/context/CartContext';
+import DynamicImage from '@/components/common/DynamicImage';
 
 export default function ServicesPage() {
   const router = useRouter();
@@ -82,8 +83,24 @@ export default function ServicesPage() {
           {categories.map((category) => (
             <div key={category.id} className="bg-white rounded-lg shadow-md overflow-hidden">
               <div className="p-6 border-b">
-                <h2 className="text-2xl font-bold">{category.name}</h2>
-                <p className="text-gray-600 mt-2">{category.description}</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 mr-4 flex-shrink-0">
+                    <DynamicImage
+                      type="icon"
+                      category="service-category"
+                      categoryId={category.id.toString()}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-contain"
+                      fallbackUrl={category.icon || `/icons/service-${category.slug}.svg`}
+                      fallbackAlt={category.name}
+                    />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold">{category.name}</h2>
+                    <p className="text-gray-600 mt-2">{category.description}</p>
+                  </div>
+                </div>
               </div>
 
               <div className="p-6">
@@ -92,15 +109,31 @@ export default function ServicesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {services[category.id].map((service) => (
                       <div key={service.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                        <div className="flex justify-between items-center">
-                          <h4 className="font-medium">{service.name}</h4>
-                          <span className="text-gray-700">₹{service.discountedPrice || service.price}</span>
-                        </div>
-                        {service.discountedPrice && (
-                          <div className="text-sm text-gray-500 line-through text-right">
-                            ₹{service.price}
+                        <div className="flex items-start">
+                          <div className="w-10 h-10 mr-3 flex-shrink-0">
+                            <DynamicImage
+                              type="icon"
+                              category="service"
+                              serviceId={service.id.toString()}
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-contain"
+                              fallbackUrl={service.icon || `/icons/service-${service.id}.svg`}
+                              fallbackAlt={service.name}
+                            />
                           </div>
-                        )}
+                          <div className="flex-grow">
+                            <div className="flex justify-between items-center">
+                              <h4 className="font-medium">{service.name}</h4>
+                              <span className="text-gray-700">₹{service.discountedPrice || service.price}</span>
+                            </div>
+                            {service.discountedPrice && (
+                              <div className="text-sm text-gray-500 line-through text-right">
+                                ₹{service.price}
+                              </div>
+                            )}
+                          </div>
+                        </div>
                         <div className="mt-4 flex justify-between items-center">
                           <Link
                             href={`/services/${service.id}`}

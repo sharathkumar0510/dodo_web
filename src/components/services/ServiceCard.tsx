@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Service } from '@/types';
 import { Star } from 'lucide-react';
 import { placeholderIcons } from '@/utils/placeholderIcons';
+import DynamicImage from '@/components/common/DynamicImage';
 
 interface ServiceCardProps {
   service: Service;
@@ -22,21 +23,18 @@ export default function ServiceCard({ service, categorySlug }: ServiceCardProps)
     >
       <div className="bg-white rounded-lg border transition-all duration-300 hover:shadow-md overflow-hidden">
         <div className="relative w-full aspect-video bg-gray-100">
-          {iconSrc ? (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                src={iconSrc}
-                alt={service.name}
-                className="w-16 h-16 object-contain"
-              />
-            </div>
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-              <span className="text-2xl font-bold text-gray-400">
-                {service.name.charAt(0)}
-              </span>
-            </div>
-          )}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <DynamicImage
+              type="icon"
+              category="service"
+              serviceId={service.id}
+              width={64}
+              height={64}
+              className="w-16 h-16 object-contain"
+              fallbackUrl={iconSrc}
+              fallbackAlt={service.name}
+            />
+          </div>
 
           {service.isNew && (
             <div className="absolute top-2 right-2 bg-black text-white text-xs font-medium px-2 py-0.5 rounded">

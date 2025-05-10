@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { api, SubService, Review } from '@/lib/api/mockApi';
 import { useCart } from '@/context/CartContext';
+import DynamicImage from '@/components/common/DynamicImage';
 
 export default function ServiceDetailPage() {
   const params = useParams();
@@ -99,20 +100,36 @@ export default function ServiceDetailPage() {
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="p-6 border-b">
-          <h1 className="text-3xl font-bold">{service.name}</h1>
-          {service.rating && (
-            <div className="flex items-center mt-2">
-              <div className="bg-green-50 text-green-700 px-2 py-0.5 rounded text-sm">
-                ★ {service.rating}
-              </div>
-              {service.totalBookings && (
-                <span className="text-gray-500 text-sm ml-2">
-                  ({service.totalBookings.toLocaleString()} bookings)
-                </span>
-              )}
+          <div className="flex items-start">
+            <div className="w-16 h-16 mr-4 flex-shrink-0">
+              <DynamicImage
+                type="icon"
+                category="service"
+                serviceId={service.id.toString()}
+                width={64}
+                height={64}
+                className="w-full h-full object-contain"
+                fallbackUrl={service.icon || `/icons/service-${service.id}.svg`}
+                fallbackAlt={service.name}
+              />
             </div>
-          )}
-          <p className="text-gray-600 mt-4">{service.description}</p>
+            <div>
+              <h1 className="text-3xl font-bold">{service.name}</h1>
+              {service.rating && (
+                <div className="flex items-center mt-2">
+                  <div className="bg-green-50 text-green-700 px-2 py-0.5 rounded text-sm">
+                    ★ {service.rating}
+                  </div>
+                  {service.totalBookings && (
+                    <span className="text-gray-500 text-sm ml-2">
+                      ({service.totalBookings.toLocaleString()} bookings)
+                    </span>
+                  )}
+                </div>
+              )}
+              <p className="text-gray-600 mt-4">{service.description}</p>
+            </div>
+          </div>
         </div>
 
         <div className="p-6">
@@ -173,11 +190,24 @@ export default function ServiceDetailPage() {
               {reviews.map((review) => (
                 <div key={review.id} className="border-b pb-4 last:border-b-0">
                   <div className="flex justify-between items-start">
-                    <div>
-                      <div className="font-medium">{review.userName}</div>
-                      <div className="text-yellow-500 mt-1">
-                        {'★'.repeat(review.rating)}
-                        {'☆'.repeat(5 - review.rating)}
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
+                        <DynamicImage
+                          type="avatar"
+                          category="testimonial"
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-cover"
+                          fallbackUrl={review.userAvatar || `https://via.placeholder.com/40x40?text=${review.userName.charAt(0)}`}
+                          fallbackAlt={review.userName}
+                        />
+                      </div>
+                      <div>
+                        <div className="font-medium">{review.userName}</div>
+                        <div className="text-yellow-500 mt-1">
+                          {'★'.repeat(review.rating)}
+                          {'☆'.repeat(5 - review.rating)}
+                        </div>
                       </div>
                     </div>
                     <div className="text-gray-500 text-sm">
