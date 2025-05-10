@@ -1,6 +1,6 @@
-# DoDoServices - Home Services Booking Platform
+# DoDoWeb - Home Services Booking Platform
 
-DoDoServices is a comprehensive e-commerce platform for booking home services, similar to Urban Company. The platform allows users to browse, book, and manage various home services including cleaning, repairs, salon services, and more.
+DoDoWeb is a comprehensive e-commerce platform for booking home services, similar to Urban Company. Built with Next.js for the frontend and designed to work with a Django REST API backend, this platform allows users to browse, book, and manage various home services including cleaning, repairs, salon services, and more.
 
 ## Features
 
@@ -31,8 +31,8 @@ DoDoServices is a comprehensive e-commerce platform for booking home services, s
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/sharathkumar0510/dodo-services.git
-   cd dodo-services
+   git clone https://github.com/sharathkumar0510/dodo_web.git
+   cd dodo_web
    ```
 
 2. Install dependencies:

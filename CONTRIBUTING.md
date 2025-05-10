@@ -1,6 +1,6 @@
-# Contributing to DoDoServices
+# Contributing to DoDoWeb
 
-Thank you for considering contributing to DoDoServices! This document outlines the process for contributing to this project.
+Thank you for considering contributing to DoDoWeb! This document outlines the process for contributing to this project.
 
 ## Code of Conduct
 
@@ -49,12 +49,14 @@ By participating in this project, you agree to abide by our Code of Conduct. Ple
 ## Development Setup
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/sharathkumar0510/dodo_web.git
    cd dodo_web
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -87,4 +89,4 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 
 ## License
 
-By contributing to DoDoServices, you agree that your contributions will be licensed under the project's MIT License.
+By contributing to DoDoWeb, you agree that your contributions will be licensed under the project's MIT License.
